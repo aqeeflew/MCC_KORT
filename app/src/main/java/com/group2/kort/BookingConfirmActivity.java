@@ -1,8 +1,15 @@
 package com.group2.kort;
 
 import java.util.HashMap;
+import java.util.Map;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.DatabaseError;
 import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -15,14 +22,17 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import java.util.Calendar; // Required for time scheduling
+import java.util.Calendar;
 
 public class BookingConfirmActivity extends AppCompatActivity {
     DataHelper dbHelper;
     String sport, court, date, time;
     DatabaseReference mDatabase;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +40,8 @@ public class BookingConfirmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_booking_confirm);
         if (getSupportActionBar() != null) getSupportActionBar().hide();
 
-        // Fixed the invalid Database URL.
-        mDatabase = FirebaseDatabase.getInstance("https://kortapp-36231-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
+        mDatabase = FirebaseDatabase.getInstance(FirebaseConfig.DATABASE_URL).getReference();
+        auth = FirebaseAuth.getInstance();
 
         dbHelper = new DataHelper(this);
 
@@ -54,9 +64,7 @@ public class BookingConfirmActivity extends AppCompatActivity {
         }
 
         findViewById(R.id.btnFinalConfirm).setOnClickListener(v -> {
-            saveToOfflineDB();      
-            setAlarm(sport);        
-            saveToFirebase(); // Navigation is now inside this method
+            saveToFirebase();
         });
     }
 
@@ -85,29 +93,91 @@ public class BookingConfirmActivity extends AppCompatActivity {
     }
 
     private void saveToFirebase() {
-        String bookingId = mDatabase.child("bookings").push().getKey();
+        FirebaseUser user = auth.getCurrentUser();
+        if (user == null) {
+            Toast.makeText(this, "Please login before booking", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
 
-        HashMap<String, String> bookingMap = new HashMap<>();
+        findViewById(R.id.btnFinalConfirm).setEnabled(false);
+        String slotKey = makeFirebaseKey(sport + "_" + court + "_" + date + "_" + time);
+
+        mDatabase.child("bookingSlots").child(slotKey).runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                if (currentData.getValue() != null) {
+                    return Transaction.abort();
+                }
+                currentData.setValue(user.getUid());
+                return Transaction.success(currentData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable com.google.firebase.database.DataSnapshot currentData) {
+                if (error != null) {
+                    findViewById(R.id.btnFinalConfirm).setEnabled(true);
+                    Toast.makeText(BookingConfirmActivity.this, "Booking failed: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (!committed) {
+                    findViewById(R.id.btnFinalConfirm).setEnabled(true);
+                    Toast.makeText(BookingConfirmActivity.this, "This slot is already booked. Please select another slot.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                writeBooking(user.getUid());
+            }
+        });
+    }
+
+    private void writeBooking(String uid) {
+        String bookingId = mDatabase.child("bookings").push().getKey();
+        if (bookingId == null) {
+            findViewById(R.id.btnFinalConfirm).setEnabled(true);
+            Toast.makeText(this, "Booking failed. Please try again.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        HashMap<String, Object> bookingMap = new HashMap<>();
+        bookingMap.put("bookingId", bookingId);
+        bookingMap.put("userId", uid);
         bookingMap.put("sport", sport);
         bookingMap.put("court", court);
         bookingMap.put("date", date);
         bookingMap.put("time", time);
+        bookingMap.put("status", "confirmed");
+        bookingMap.put("createdAt", System.currentTimeMillis());
 
-        if (bookingId != null) {
-            // Disable the button to prevent multiple clicks
-            findViewById(R.id.btnFinalConfirm).setEnabled(false);
-            
-            mDatabase.child("bookings").child(bookingId).setValue(bookingMap)
-                    .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(BookingConfirmActivity.this, "Synced to Cloud!", Toast.LENGTH_SHORT).show();
-                        navigateToDashboard();
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(BookingConfirmActivity.this, "Sync Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                        // Even if sync fails (e.g., offline), we still navigate so the user isn't stuck
-                        navigateToDashboard();
-                    });
-        }
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("/bookings/" + bookingId, bookingMap);
+        updates.put("/userBookings/" + uid + "/" + bookingId, bookingMap);
+
+        mDatabase.updateChildren(updates)
+                .addOnSuccessListener(aVoid -> {
+                    saveToOfflineDB();
+                    setAlarm(sport);
+                    Toast.makeText(BookingConfirmActivity.this, "Booking saved to Firebase!", Toast.LENGTH_SHORT).show();
+                    navigateToDashboard();
+                })
+                .addOnFailureListener(e -> {
+                    findViewById(R.id.btnFinalConfirm).setEnabled(true);
+                    Toast.makeText(BookingConfirmActivity.this, "Sync Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                });
+    }
+
+    private String makeFirebaseKey(String value) {
+        return value.replace(".", "_")
+                .replace("#", "_")
+                .replace("$", "_")
+                .replace("[", "_")
+                .replace("]", "_")
+                .replace("/", "_")
+                .replace(" ", "_")
+                .replace(":", "_");
     }
 
     private void navigateToDashboard() {

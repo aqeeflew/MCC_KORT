@@ -8,13 +8,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-// Firebase Import
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private EditText etEmail, etPassword; // Added to match Login structure
+    private DatabaseReference database;
+    private EditText etName, etEmail, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +30,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance(FirebaseConfig.DATABASE_URL)
+                .getReference();
 
-        // Assuming your layout has these IDs for email and password
+        etName = findViewById(R.id.etRegName);
         etEmail = findViewById(R.id.etRegEmail);
         etPassword = findViewById(R.id.etRegPassword);
         Button btnRegister = findViewById(R.id.btnRegister);
@@ -35,21 +41,41 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = etName.getText().toString().trim();
                 String email = etEmail.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
 
-                if (email.isEmpty() || password.isEmpty()) {
+                if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Fill all fields!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (password.length() < 6) {
+                    Toast.makeText(RegisterActivity.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                // Create User in Firebase
+                btnRegister.setEnabled(false);
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(RegisterActivity.this, task -> {
                             if (task.isSuccessful()) {
-                                Toast.makeText(RegisterActivity.this, "User Registered!", Toast.LENGTH_SHORT).show();
-                                finish(); // Returns to Login screen
+                                String uid = mAuth.getCurrentUser().getUid();
+                                HashMap<String, Object> user = new HashMap<>();
+                                user.put("name", name);
+                                user.put("email", email);
+                                user.put("createdAt", System.currentTimeMillis());
+
+                                database.child("users").child(uid).setValue(user)
+                                        .addOnSuccessListener(unused -> {
+                                            Toast.makeText(RegisterActivity.this, "User Registered!", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        })
+                                        .addOnFailureListener(error -> {
+                                            btnRegister.setEnabled(true);
+                                            Toast.makeText(RegisterActivity.this,
+                                                    "Profile save failed: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                                        });
                             } else {
+                                btnRegister.setEnabled(true);
                                 Toast.makeText(RegisterActivity.this, "Error: " +
                                         task.getException().getMessage(), Toast.LENGTH_LONG).show();
                             }

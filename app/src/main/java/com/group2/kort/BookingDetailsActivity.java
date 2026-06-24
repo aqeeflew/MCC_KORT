@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CalendarView;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class BookingDetailsActivity extends AppCompatActivity {
-    String selectedDate = "2026-01-23"; // Default date
+    String selectedDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

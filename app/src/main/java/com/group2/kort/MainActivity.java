@@ -2,16 +2,17 @@ package com.group2.kort;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-// Google Maps Imports
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -25,6 +26,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Hide Action Bar if it exists
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
+        }
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
         }
 
         // Initialize Google Map Fragment
