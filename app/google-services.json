@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "94535689773",
+    "project_id": "kortapp-36231",
+    "storage_bucket": "kortapp-36231.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94535689773:android:c7b94d2ef315ea62e6baa4",
+        "android_client_info": {
+          "package_name": "com.group2.kort"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArHigrbjvc7IeSvHERahYA84wjr9g2uPE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
