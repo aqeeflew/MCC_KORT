@@ -23,5 +23,21 @@ public class CourtSelectionActivity extends AppCompatActivity {
             intent.putExtra("COURT", "Court 1");
             startActivity(intent);
         });
+
+        // Logic for Court 2
+        findViewById(R.id.btnBook2).setOnClickListener(v -> {
+            Intent intent = new Intent(this, BookingDetailsActivity.class);
+            intent.putExtra("SPORT", sport);
+            intent.putExtra("COURT", "Court 2");
+            startActivity(intent);
+        });
+
+        findViewById(R.id.btnShowMap).setOnClickListener(v -> {
+            Intent mapIntent = new Intent(this, MapActivity.class);
+            mapIntent.putExtra("SPORT_TYPE", sport);
+            startActivity(mapIntent);
+        });
+
+        findViewById(R.id.fabBack).setOnClickListener(v -> finish());
     }
 }

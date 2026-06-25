@@ -1,5 +1,6 @@
 package com.group2.kort;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -67,7 +68,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 database.child("users").child(uid).setValue(user)
                                         .addOnSuccessListener(unused -> {
                                             Toast.makeText(RegisterActivity.this, "User Registered!", Toast.LENGTH_SHORT).show();
-                                            finish();
+                                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                            startActivity(intent);
+                                            finishAffinity();
                                         })
                                         .addOnFailureListener(error -> {
                                             btnRegister.setEnabled(true);

@@ -3,6 +3,7 @@ package com.group2.kort;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CalendarView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,16 +28,24 @@ public class BookingDetailsActivity extends AppCompatActivity {
         CalendarView calendarView = findViewById(R.id.calendarView);
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             // Format date for database storage as per Lab 3
-            selectedDate = year + "-" + (month + 1) + "-" + dayOfMonth;
+            String m = (month + 1) < 10 ? "0" + (month + 1) : String.valueOf(month + 1);
+            String d = dayOfMonth < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
+            selectedDate = year + "-" + m + "-" + d;
         });
 
+        Spinner spinnerTime = findViewById(R.id.spinnerTime);
+
         findViewById(R.id.btnConfirmAction).setOnClickListener(v -> {
-            Intent intent = new Intent(BookingDetailsActivity.this, BookingConfirmActivity.class);
-            intent.putExtra("SPORT", sport);
-            intent.putExtra("COURT", court);
-            intent.putExtra("DATE", selectedDate);
-            intent.putExtra("TIME", "10:00 AM");
-            startActivity(intent);
+            String selectedTime = spinnerTime.getSelectedItem().toString();
+
+            Intent confirmIntent = new Intent(this, BookingConfirmActivity.class);
+            confirmIntent.putExtra("SPORT", sport);
+            confirmIntent.putExtra("COURT", court);
+            confirmIntent.putExtra("DATE", selectedDate);
+            confirmIntent.putExtra("TIME", selectedTime);
+            startActivity(confirmIntent);
         });
+
+        findViewById(R.id.fabBack).setOnClickListener(v -> finish());
     }
 }

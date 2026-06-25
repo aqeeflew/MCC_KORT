@@ -28,10 +28,11 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvWelcomeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvKortLogo"
-                android:text="Welcome,\niman"
+                android:text="Welcome,\nPlayer"
                 android:textColor="#BBBBBB"
                 android:textSize="16sp" />
 
@@ -50,13 +51,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnHistory"
                 android:layout_width="0dp"
                 android:layout_height="65dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="#1A1A1A"
                 app:cardCornerRadius="12dp">
@@ -72,10 +73,30 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnFindPlayers"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableStart="@android:drawable/ic_menu_search"
+                    android:drawablePadding="10dp"
+                    android:text="Match"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/btnProfile"
                 android:layout_width="0dp"
                 android:layout_height="65dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="#1A1A1A"
                 app:cardCornerRadius="12dp">
@@ -193,11 +214,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="300dp" />
+
 
     </LinearLayout>
 </ScrollView>

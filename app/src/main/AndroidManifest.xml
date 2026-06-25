@@ -18,6 +18,15 @@
         android:theme="@style/Theme.Kort">
 
         <activity
+            android:name=".MapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MatchmakingActivity"
+            android:exported="false" />
+        <activity
             android:name=".BookingDetailsActivity"
             android:exported="false" />
         <activity

@@ -66,12 +66,16 @@ public class BookingConfirmActivity extends AppCompatActivity {
         findViewById(R.id.btnFinalConfirm).setOnClickListener(v -> {
             saveToFirebase();
         });
+
+        findViewById(R.id.fabBack).setOnClickListener(v -> finish());
     }
 
     private void saveToOfflineDB() {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user == null) return;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String sql = "insert into bookings(sport, court, date, time) values('" +
-                sport + "','" + court + "','" + date + "','" + time + "')";
+        String sql = "insert into bookings(userId, sport, court, date, time) values('" +
+                user.getUid() + "','" + sport + "','" + court + "','" + date + "','" + time + "')";
         db.execSQL(sql);
         Toast.makeText(this, "Booking saved to History!", Toast.LENGTH_SHORT).show();
     }
@@ -85,7 +89,15 @@ public class BookingConfirmActivity extends AppCompatActivity {
                 intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.SECOND, 5);
+        try {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm a", java.util.Locale.US);
+            java.util.Date bookingDate = sdf.parse(date + " " + time);
+            if (bookingDate != null) {
+                cal.setTime(bookingDate);
+            }
+        } catch (Exception e) {
+            cal.add(Calendar.SECOND, 5); // Fallback
+        }
 
         if (alarmManager != null) {
             alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
