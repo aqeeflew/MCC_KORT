@@ -1,0 +1,665 @@
+​
+FACULTY OF COMPUTER AND MATHEMATICAL SCIENCES​
+UNIVERSITI TEKNOLOGI MARA​
+SHAH ALAM
+BACHELOR OF COMPUTER SCIENCE (HONS.)
+NETCENTRIC COMPUTING
+ICT602​
+(MOBILE TECHNOLOGY AND DEVELOPMENT)​
+​
+​
+GROUP PROJECT
+Kort – Sports Court Booking Management System​
+​
+PREPARED BY: GROUP 2​
+NO.
+
+NAME
+
+STUDENT ID
+
+1.
+
+MUHAMMAD AQEEF BIN AZHAR
+
+2023414888
+
+2.
+
+MUHAMMAD REDHA BIN ABDUL RAHIM
+
+2023213148
+
+3.
+
+ISMIE ZULAIQHA BINTI ZAINAL
+
+2023268474
+
+4.
+
+NURUL IMAN BINTI SAHROLNIZAN
+
+2023415094
+
+​
+CLASS: CDCS2515B​
+​
+SUBMISSION DATE: 30TH JANUARY 2026
+PREPARED FOR: DR. NORKHUSHAINI BT AWANG
+
+TABLE OF CONTENTS
+
+NO. ​ ​
+
+​
+
+​
+
+​
+
+​
+
+CONTENT​
+
+​
+
+​
+
+​
+
+​
+
+PAGE
+
+1.0
+
+INTRODUCTION​
+
+2
+
+2.0
+
+PROBLEM STATEMENT​
+
+2
+
+3.0
+
+OBJECTIVES​
+
+4
+
+4.0
+
+TARGET USER​
+
+4
+
+5.0
+
+FEATURES OF THE APPLICATION​
+
+6
+
+5.1
+
+INTEGRATED LAB ACTIVITIES​
+
+6
+
+5.2
+
+ADDITIONAL FEATURES​
+
+9
+
+6.0
+
+LIMITATIONS OF THE APPLICATION​
+
+11
+
+7.0
+
+USER INTERFACE​
+
+12
+
+8.0
+
+REFLECTION​
+
+22
+
+8.1
+
+CHALLENGES​
+
+22
+
+8.2
+
+LESSONS LEARNED​
+
+22
+
+9.0
+
+CONCLUSION​
+
+23
+
+10.0
+
+REFERENCES​
+
+24
+
+11.0
+
+APPENDICES​
+
+24
+
+​
+
+1
+
+1.0 INTRODUCTION
+With modern living creating the need for efficient systems to support daily
+activities, one major element of this new culture is the use of mobile apps. Mobile
+applications provide quick access to services that, in the past, would have been handled
+manually but can now all be found on smartphones, as the pace of technology has
+developed rapidly. An example of these services that are commonly used by students,
+employees and the general public are local recreational sports facilities (badminton,
+futsal, tennis courts, etc.). However, making a reservation to use a sports facility has
+typically been completed using walk-in or phone reservations, or via text message
+methods.
+Kort is a mobile app developed using Android Studio which enables the user to
+have a more structured/streamlined approach to reserving sport courts than what was
+traditionally used. Users will be able to access a listing of the types of sport facilities
+available, submit their reservations and access their reservation history with a single tap
+instead of depending on a manual process. As well, the application is designed to send
+reminders to users about their reservation confirmations and future reservation
+schedules.
+Kort’s goal is to create a better overall experience for the user by limiting the
+number of conflicts with regard to reservations, tracking reservations better and
+providing a more convenient method of reserving sport facilities for those that use them
+regularly.
+​
+2.0 PROBLEM STATEMENT
+The way that sports centres operate and book sports courts are still very
+human-based, with many sports being booked by walking in, calling them up, or sending
+them a text through WhatsApp, etc. The traditional booking systems of sports courts
+through these human-based methods create operational inefficiencies such as double
+bookings, no uncertainty about when courts are available or where bookings are, and
+the potential to lose the booking altogether for both the user and sports centre facility
+administrators. Sports centres also rely on human coordination, so if there is a lack of
+
+2
+
+proper structure in how they book their courts, the potential for errors will be higher
+(Laudon & Laudon, 2020).
+Users that want to use manual sports court bookings also have difficulty checking
+on real-time availability on the courts. Students and modern-day working adults are
+typically busy and may have trouble visiting sports centres in person or constantly calling
+them to confirm their bookings. If a facility does not have a digital platform, then that
+facility will not be able to email the users confirmation of their booking and automatically
+track their bookings, which increases the users' chances of missing a reservation
+(Kumar & Sharma, 2021).
+Sporting facilities administrators are required to book their use of facility space by
+physically writing down on paper their bookings which results in the administrative load
+to maintain similar records and as a result, operational inefficiencies. Furthermore, there
+is no centralised digital booking system for administrators to keep track of this
+information and courts. Prior research has shown that using mobile-based reservation
+systems will enhance the accuracy of scheduling, the consistency of data and the
+satisfaction of users through automating the process of booking and providing
+notifications (Pressman & Maxim, 2020).
+Thus, there is a need for a mobile sports court booking application to provide a
+consistent method to complete bookings of sporting facilities, with access to centralised
+data storage, maintaining bookings history throughout the sporting facility lifetime, and
+providing instant notifications, via the proposed Kort application, to users via the
+proposed Android-based application to reduce reliance on manual processes in creating
+and maintaining reservations, improve the overall user experience and reduce booking
+conflicts.
+
+3
+
+3.0 OBJECTIVES​
+1.​ To provide a mobile booking platform that allows users to select sports courts and
+make bookings easily through a structured booking process.
+2.​ To enable users to store and view their booking history using offline database
+storage for better booking tracking and reference.
+3.​ To let the system sends booking confirmation messages together with reminder
+notifications to users through its automated notification system which helps
+prevent users from missing their scheduled bookings.
+4.​ To provide a digital booking management system helps to eliminate double
+booking and scheduling problems and lost booking information which currently
+affect manual booking processes.
+
+4.0 TARGET USER
+Kort is designed for a wide range of users which offers court reservation service
+through its user-friendly design which functions as an organized system for users who
+need to reserve sports facilities at the sports center. The application provides users with
+an improved booking experience which exceeds the functionality of traditional booking
+methods that include walk-in access, phone reservations, and messaging services. The
+target users for this application include the following groups:
+a) General Sports Users
+General sports users are individuals who frequently participate in sports
+activities such as badminton, futsal, tennis, pickleball, and other recreational
+games. These users can reserve courts to play sports for various purposes which
+include their personal enjoyment and fitness training and social matches and
+official practice sessions. Through Kort users can make faster court reservations
+
+4
+
+while they maintain an organized system which lets them view their current
+bookings and past booking records.
+b) Students
+Students are one of the key target users because they often look for
+sports venues to play with friends, join recreational activities, or organize social
+gatherings and group events. Students prefer a quick and easy booking process
+because they face busy schedules which reduce their free time between classes
+and they need to handle unexpected events during their day. With Kort, students
+can conveniently book a court through their mobile phone without needing to
+queue at the sports centre or contact staff manually. The system improves
+booking efficiency while encouraging students to maintain active lifestyles
+together with their obligation to lead balanced lives in their daily activities.
+c) Working Adults
+Working adults are also suitable users for Kort because they may want to
+book sports courts after working hours for exercise, stress relief, and maintaining
+a healthy lifestyle. Staff members prefer a booking system which they can access
+easily without needing to confirm their reservations through phone calls or
+physical visits. The Kort application provides a more convenient solution for
+working adults because they can make bookings and receive confirmation
+notifications while keeping track of their reservations for future reference.
+d) Sports Clubs and Teams
+Sports clubs and teams need regular training and practice match times,
+which require them to establish permanent booking schedules. The groups need
+to book courts for their activities which they will do either weekly or monthly, so
+they require a dependable system that will help them prevent any scheduling
+conflicts. Kort which offers clubs and teams court booking functions enables them
+to handle their booking information while protecting themselves against double
+booking incidents.
+
+5
+
+e) Facility Administrators / Sports Centre Management
+Facility administrators refer to the staff responsible for managing the
+sports centre operations such as monitoring court schedules, confirming
+bookings, and maintaining booking records. Although the main focus of Kort is
+the user booking process, the application can also support sports centre
+management by improving booking organization and ensuring that booking data
+is properly recorded. This helps administrators reduce manual workload and
+manage court usage more effectively.
+
+5.0 FEATURES OF THE APPLICATION
+5.1 INTEGRATED LAB ACTIVITIES
+In this project, our proposed Android application Kort has integrated four lab
+activities that have been completed throughout the semester.
+a)​ Layout & UI Design (Lab 2)
+The user interface is one of the most important aspects of any mobile
+application because it determines how users interact with the system. In Kort,
+Lab 2 is implemented through the design of multiple screens and navigation flow.
+The application uses XML layout files in Android Studio to create a structured
+design and consistent visual elements throughout its design.
+The application contains user interface components which include buttons
+and text fields and images and navigation elements. The system enables users
+to transition effortlessly between multiple screens including the splash screen
+and login page and registration page and main dashboard and court selection
+page and booking details page and booking confirmation page and booking
+history page. The application provides an easy-to-use interface which delivers a
+good experience to all users.
+
+6
+
+b)​ Offline Database (Lab 3)
+One of the main features of Kort is the ability to store local data on a
+device using an offline database. This allows users to access their booking
+records regardless of whether or not they have access to the Internet, as proven
+by using SQLite to implement Lab 3.
+When users confirm their bookings, the details of that booking including
+the type of sport that is booked for a court number, the date and time of the
+booking and the status of that booking will be recorded in the local SQLite
+database. To view prior reservations, users can access the booking history page
+which accesses data directly out of the SQLite database. The reliability of
+tracking of the bookings will be improved with the storing of the booking records
+in offline mode, allowing users to always record their sports bookings, even when
+the user does not have access to an active internet connection.
+c)​ Online Database (Lab 4)
+Mobile apps that use an online database can save user info on a central
+server. This makes it easier to find anything they have entered or done
+previously, when they log in from any of their devices. In the Kort app, Lab 4 is
+implemented by using Google Firebase to provide a cloud solution to store all
+user registration information and bookings. This way, the app can provide more
+effective management of their data compared to if they worked entirely on local
+resources.
+User registration info is stored in a secure manner through the use of
+Firebase Authentication. Booking data is stored in the Firebase database when a
+user completes a booking on the booking page. Therefore, users can access
+their booking information regardless of what device they originally created it on.
+Google Firebase provides increased reliability of data, reduces the need for
+manual record-keeping and sets a precedent for future enhancements, like
+real-time synchronization of booking and administrative oversight.
+
+7
+
+d)​ Authentication (Lab 5)
+Having authentication in place is critical to allow only registered users to
+utilize every function in this application. The registration and login modules were
+created in Kort from Lab 5 by using Google Firebase as a way for the application
+to authenticate users that have registered for access to the booking system.New
+users are required to register by providing an email address and password, which
+are then will be stored and managed through Firebase Authentication.
+The system verifies all of a user’s credentials and requires them to be
+complete and accurate prior to allowing any user to continue logging into the
+system or completing the registration process. If any part of the required
+information fails validation, then an error message will be presented to the user
+and then they will not be able to enter the system. After successful login, users
+will be redirected to the main dashboard, at which point they will find all the
+features that allow them to make a booking, such as selecting a court, submitting
+their booking request, and viewing their booking history through authenticated
+access. The authentication function helps to increase the overall security of the
+system while providing individualised experiences for each user by restricting
+access to all systems to only authenticated users.
+e)​ Notification (Lab 6)
+Mobile notifications function as essential features because they enhance
+user participation while enabling users to receive ongoing updates. The system
+uses Lab 6 in Kort to deliver customers booking confirmation and reminder
+notifications to their scheduled appointments.
+The application will show a confirmation screen after the user completes
+their booking request because the system will send a notification to the user
+about their successful booking. The system enables users to set reminder
+notifications which will notify them about their upcoming booking appointments.
+The system helps users remember their appointments better because it provides
+them with increased convenience through its features.
+
+8
+
+f)​ Google Maps API (Lab 7)
+Map integration is an important feature in mobile applications because it
+helps users identify locations easily and improves overall accessibility. In Kort,
+Lab 7 is implemented by integrating Google Maps API to display the location of
+the sports centre. This feature allows users to view the venue location directly
+within the application without needing to search separately using external map
+applications.
+The system uses a map marker to show the sports centre location when
+users open the map page. The system helps users create their travel plans
+through this feature which assists first-time visitors and people who lack
+knowledge about the area. The map feature enables users to find locations easily
+which leads to better user experience during the reservation process until they
+reach the sports centre.
+
+5.2 ADDITIONAL FEATURES​
+Besides the lab-based features, Kort has also included additional features to
+improve the overall functionality of the application.
+a) Court Availability Management
+Utilising the court availability management functionality of this application
+allows users to determine the availability of courts on various days and times.
+The inclusion of this functionality will facilitate the avoidance of scheduling
+conflicts and double bookings by assisting users in selecting an appropriate
+booking time prior to confirming the reservation.
+
+9
+
+b) Structured Booking Validation
+The system will validate any booking input information provided by the
+user such as court type, before allowing them to continue with the booking
+process. As a result, it will prevent the submission of booking requests that are
+incomplete or contain incorrect information, thus increasing system reliability and
+decreasing user error during the process of reserving courts.
+c) User Restricted Display of Bookings
+Kort provides users with access to their personal booking information,
+only after logging in. This feature provides a greater level of privacy for data and
+presents each user with a personalize experience because it shows them
+relevant information about their bookings.
+d) Calendar-Based Booking View
+The application is designed to allow the user a method for being able to
+visually view and organize their bookings in a structured way by using a calendar
+display. This method will allow users to see both their future and previous
+bookings based on the date of the reservation, thus providing greater
+transparency for managing time and bookings, without the need for reminder
+notifications.
+
+10
+
+6.0 LIMITATIONS OF THE APPLICATION
+​
+​
+
+Although Kort is designed to improve the sports court booking process, there are
+
+several limitations that may affect the application’s overall functionality and user
+experience.
+a)​ Single Sports Centre Support
+Firstly,the application currently supports only one sports center as its
+current operational capability. Users can book courts at the same facility because
+the system does not allow them to access multiple venues for booking purposes.
+Users who want to check court availability at multiple sports centers must use
+different platforms or book their appointments through manual methods. The
+Google Maps API integration displays the location of a single sports center but
+cannot show multiple venues or enable users to search for other locations.
+b)​ Limited System-Integrated Administrative Control
+While Kort has implemented Google Firebase as an online database and
+administrators are able to manipulate booking and user data in real time from the
+Firebase console, the current version of this application contains no
+administrative interface integrated into the application itself. Therefore, all
+administrative updates must take place outside the application either manually or
+via email without having access to role-based security, validation mechanisms, or
+any other type of booking management tools. Although these changes will also
+be reflected in the application after pulling data from Firebase, this method is
+inefficient and can leave the system less secure. Future releases of the system
+may provide the development team with a large amount of administrative control
+over the system by developing an integrated administrator panel that has access
+controls for the administrator, including validation mechanisms and automatic
+management of data.
+
+11
+
+7.0 USER INTERFACE​
+​
+
+Figure 7.1: Splash Screen, Login Page and Registration Page
+
+The initial screen of the Kort application's user interface is shown in Figure 7.1,
+which including the splash screen, the login page, and the registration page. Once the
+user launches the Kort application, they will encounter the splash screen which shows
+the application logo and branding that is used to give users an introduction and overview
+to the system. Registered users can log in to the application from the login page by
+entering their email and password. New users must register through the registration
+page by entering their personal information and login information like name, email and
+password to complete the registration. All three pages allow users to safely log on to the
+application and serve as the entry point to use the main booking features.
+
+12
+
+Figure 7.2: Login and Registration Validation Interface
+
+The interface for login and registration validation of the Kort App is shown in
+Figure 7.2. The Authentication process contains validation feedback to the user in
+real-time. Error messages are displayed when incorrect login credentials have been
+inputted and errors if the user has not satisfied registration requirements like password
+minimum length, completeness of input. System messages are also displayed on the
+screen
+
+confirming
+
+successful
+
+registration or login attempts. These validation
+
+mechanisms will prevent unauthorized users from being able to gain access to the
+application, while at the same time will assist the user with correcting input errors prior to
+continuing onto the main system
+
+13
+
+Figure 7.3: Main Dashboard Page
+
+After successful authentication, users are brought to the main dashboard as
+shown in Figure 7.3. This page acts as the primary navigation point once users have
+logged into the application. It shows a collection of sports offered by the Kort application,
+including pickleball, badminton, futsal and tennis. The dashboard also contains other
+information such as booking history and user profile information, which is accessible
+from the main dashboard. The layout of the dashboard is structured in such a way that it
+makes it easy for users to select a sport from the dashboard and continue on to the
+booking process.
+
+14
+
+Figure 7.4: Court Selection and Booking Details Page
+
+In Figure 7.4, it presents the court selection and booking details pages, which
+appear after a user selects a sport from the dashboard.This page shows that when
+selecting a court, the user will be shown a list of courts available for the selected sport
+based upon respective criteria including the court’s hours of operation, price, etc. When
+the user selects a court, they will be directed to the booking details page where they will
+be given the option of selecting a date and time for their reservation utilizing a calendar
+view of available times. The court selection and booking detail pages provide the user
+with the opportunity to verify that they have selected the correct court and have the
+appropriate information before confirming their reservation.
+
+15
+
+Figure 7.5: Booking Confirmation Page
+
+Once a user completes the required information for their booking, they will be
+taken to the confirmation page of the booking as shown in figure 7.5. This page contains
+a summary of the information given for the sport being reserved, and the date, time, and
+location of that reservation. From this page, the user can confirm their reservation and
+will receive confirmation that it has been successfully submitted to the system.
+
+16
+
+Figure 7.6: Notification and Reminder Interface
+
+After confirmation of a reservation, the system will notify the user of the booking
+as a success, and remind them of their future reservations as shown in figure 7.6.
+Notifications are sent through the device's notification system, thus providing the user
+with information regarding their successful reservation, and upcoming reservation
+dates/times. The actions of confirming a reservation will allow for the user to remain
+informed and prevent missing a reserved court.
+
+17
+
+Figure 7.7: Booking History Page
+
+Then, through the booking history page as shown in Figure 7.7, users are able to
+view all previous and upcoming reservations, identify bookings associated with their
+account, and keep track of their ongoing reservations. The ability to see booking history
+creates an overall reference point for users to facilitate the management and review of
+any of their reservations made using the application.
+
+18
+
+Figure 7.8: Map View and Navigation Interface
+
+Finally, the map and navigation function of Kort using Google Maps API is shown
+in Figure 7.8, where the user can see precisely where the selected sports centre is by
+using an underlying map displayed within the app. On the map, the user will be able to
+locate the sport court by seeing a marker that points to the court and will help guide them
+to the actual sport court visually. The navigation function will also provide route and
+distance from the user's location to the selected sports centre, as well as provide an
+estimate of the travel time to the sport centre. This function will let to provide assistance
+in finding and navigating to the selected location without having to search for directions
+outside of the app.
+
+19
+
+Figure 7.9: Firebase Authentication User Records
+
+The Firebase Authentication backend records of the Kort app are shown in
+Figure 7.9. This figure shows that user registrations and logins are correctly recorded in
+Firebase. Each user has their own set of registration and login credentials that enable
+the system to effectively manage security of authenticated access by managing it in a
+centrally stored and managed way using the Firebase backend. Thus, this backend
+implementation supports the user interface authentication features described above
+through central management and storage of user accounts versus local management
+and storage within the application itself.
+
+20
+
+Figure 7.10: Firebase Realtime Database Storing Booking Information
+
+The Firebase Realtime Database in the Kort App as shown in Figure 7.10 is
+being used for the storage of data related to the reservation of sports courts. The
+information that is stored such as sport type, court number, date, and time is
+automatically saved to the database after the user has completed their reservation
+through the app. By having all of the reservations stored in one place, in an online
+database, users can access their reservations from multiple devices and user data can
+be organized in ways that would be impossible by using local file systems. The
+successful integration of an online database for supporting the management of
+reservations demonstrates the potential for future development of features like real-time
+updates or administrator monitoring.
+
+21
+
+8.0 REFLECTION
+8.1 CHALLENGES
+During the development of Kort, we have been facing some challenges such as:
+●​ Designing consistent UI layouts across different pages.​
+●​ Implementing database operations such as insert, update, and retrieve booking
+history.​
+●​ Handling authentication validation and ensuring secure login flow.​
+●​ Implementing notifications correctly across different Android versions.​
+●​ Integrating Google Maps API and ensuring the sports centre location is displayed
+correctly on the map.
+
+8.2 LESSONS LEARNED
+Through this project, we have learn:
+●​ How to apply Android Studio development skills in a complete application.​
+●​ How to integrate multiple lab activities into one functional system.​
+●​ How to improve teamwork and manage development tasks efficiently.​
+●​ How to test mobile applications and fix bugs systematically.​
+●​ How to prepare a complete project report and documentation.
+
+22
+
+9.0 CONCLUSION​
+To sum up, the Kort app is a mobile phone application designed for Android
+phone users that aids in the organized booking of sports courts. The Kort app has all the
+essential features of an effective booking system which allows users to select a sports
+court, reserve a sports court, see their reservation history, using both offline (SQLite’s
+local storage) and online (Google Firebase's online database) methods. Because of
+Firebase, the user and booking information can be accessed on multiple devices,
+thereby lessening the need for paper or other forms of record-keeping. Automated
+booking confirmation notifications and reminder notifications will also be sent, along with
+the integration of the Google Maps API to assist users in finding the sports centre.
+Through Kort, users may avoid typical problems associated with manual booking
+processes, such as double bookings, missing reservations, and inefficient management
+of reservations. These problems are solved by the inclusion of the essential components
+of a mobile application including user interface design, user authentication, offline and
+online databases, navigation map and notification functionality. This demonstrates that
+the Kort app can provide users with practical and user-friendly ways to book sports.
+Kort presently can only support the use of one sports center at a time, and does
+not have a multi-venue booking feature. There is also currently unavailable for the user
+to see the location of multiple sports Centres through the map feature. Additionally, while
+a cloud-based database exists, advanced features such as real-time synchronization,
+integrated admin control and automatic booking management are not available in their
+entirety. Future enhancements like adding multiple venue support, improving real-time
+synchronization, along with implementing admin side control could greatly enhance the
+scalability and effectiveness of the application.
+
+23
+
+10.0 REFERENCES
+Kumar, R., & Sharma, V. (2021). Design and development of mobile-based reservation
+systems for service management. International Journal of Computer Applications,
+174(9), 15–20.
+Laudon, K. C., & Laudon, J. P. (2020). Management information systems: Managing the
+digital firm (16th ed.). Pearson Education.
+Pressman, R. S., & Maxim, B. R. (2020). Software engineering: A practitioner’s
+approach (9th ed.). McGraw-Hill Education.
+Android Developers. (2023). Android application architecture and data storage.
+https://developer.android.com
+
+11.0 APPENDICES
+a)​ GITHUB LINK:
+https://github.com/DerrickR0se1/Kort-App
+b)​ GOOGLE DRIVE LINK:
+ICT602 GROUP 2 (KORT)
+
+24
+
+

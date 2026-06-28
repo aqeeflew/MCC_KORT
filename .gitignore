@@ -13,6 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-add context/
-pre_flight_checklist.md
 matchmaking-api/node_modules/

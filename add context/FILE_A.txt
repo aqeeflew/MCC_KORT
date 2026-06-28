@@ -1,0 +1,194 @@
+Group Project: Mobile Application
+Development with Cloud Integration
+Course: CSP650 (Example) - Mobile Application Development
+Project Type: Group Project (4-5 members)
+Submission: Final Report (PDF) & Video Presentation
+
+1. Introduction & Objectives
+This group project is the main practical component of this course. The primary goal is to design, develop,
+and deploy a fully functional mobile application that solves a real-world problem. The application must
+leverage modern cloud computing services for its backend infrastructure and business logic.
+
+Learning Objectives:
+●
+●
+●
+●
+●
+
+To gain practical experience in the complete mobile application development lifecycle.
+To design and implement a scalable, cloud-native application architecture.
+To integrate and manage multiple third-party cloud computing services (PaaS/SaaS/IaaS).
+To design, build, and deploy a custom "in-house" web service (API) to support the mobile
+application.
+To practice project management, teamwork, and technical documentation skills.
+
+2. Project Task
+Your group is tasked to propose, design, develop, and document a mobile application for either Android
+or iOS (or cross-platform using frameworks like Flutter or React Native).
+The core of this project lies in the architecture. The application must not be a simple standalone app. It
+must be a cloud-integrated solution that meets the specific technical requirements below.
+
+3. Technical Requirements
+Your project submission will be evaluated on the successful implementation of the following three
+requirements:
+
+a. Mobile Application (Android/iOS)
+You must develop a native or cross-platform mobile application. Your group will define the problem
+statement, target audience, and key features of the app.
+
+b. Integration with Third-Party Cloud Services (Minimum 3)
+
+Your application must be integrated with at least THREE (3) different third-party cloud computing
+services. These services should provide the foundational backend for your app.
+Examples of services you can use:
+●
+
+●
+
+●
+
+●
+
+●
+
+●
+●
+
+●
+
+Authentication:
+○ Firebase Authentication (Google)
+○ AWS Cognito (Amazon)
+○ Auth0
+○ Google Sign-In / Apple Sign-In
+Database (DBaaS):
+○ Firebase Firestore / Realtime Database (Google)
+○ AWS DynamoDB (Amazon)
+○ MongoDB Atlas
+Storage (Object Storage):
+○ Firebase Cloud Storage (Google)
+○ AWS S3 (Amazon)
+Location & Maps:
+○ Google Maps Platform (e.g., Maps SDK, Geocoding API)
+○ Mapbox
+Serverless Functions (FaaS):
+○ Cloud Functions for Firebase (Google)
+○ AWS Lambda (Amazon)
+Analytics:
+○ Google Analytics for Firebase
+Machine Learning:
+○ Google ML Kit (on-device or cloud)
+○ AWS Rekognition (for image analysis)
+Notifications:
+○ Firebase Cloud Messaging (FCM)
+○ Amazon Simple Notification Service (SNS)
+
+c. Integration with In-House Web Service (Minimum 1)
+In addition to the third-party services, your application must communicate with at least ONE (1) custom
+"in-house" web service.
+●
+●
+
+●
+●
+
+What this means: You must design, develop, deploy, and host your own backend RESTful API.
+Purpose: This API should provide custom business logic that is specific to your application and not
+available from a third-party service. (e.g., a custom recommendation engine, complex data
+processing, managing specific user logic).
+Technology: You can use any backend technology (e.g., Node.js/Express, Python/Flask/Django,
+Java/Spring Boot).
+Hosting: This web service must be deployed to a cloud platform (e.g., Heroku, Vercel, Google App
+Engine, AWS Elastic Beanstalk).
+
+4. Recommended Methodology
+While you are free to choose your project management methodology, we strongly recommend an Agile
+approach (like Scrum). This involves working in "sprints" (e.g., 1-2 week cycles) to complete specific
+features.
+
+Suggested Project Phases:
+1. Phase 1: Planning & Design (Weeks 1-3)
+○ Ideation: Define the app's problem statement, target users, and core features.
+○ Tech Stack: Decide on your mobile framework (Native, Flutter, React Native), your 3+ thirdparty services, and your in-house API tech.
+○ Architecture: Create a detailed system architecture diagram showing how the mobile app,
+third-party services, and your in-house API connect.
+○ Design:
+■ Create UI/UX wireframes and mockups (use tools like Figma or Balsamiq).
+■ Design your database schema (e.g., your Firestore collections or SQL tables).
+■ Define the API contract (endpoints, request/response formats) for your in-house web
+service.
+2. Phase 2: Development & Integration (Weeks 4-10)
+○ Set up your cloud projects (Firebase, AWS, etc.) and development environments.
+○ Backend First: Develop and deploy the first version of your in-house web service.
+○ Mobile App: Begin building the mobile app UI.
+○ Integrate:
+■ Connect the app to cloud authentication.
+■ Connect the app to the cloud database and storage.
+■ Integrate your in-house web service.
+■ Integrate all other cloud services.
+○ Iterate: Work in sprints, testing features as you build them.
+3. Phase 3: Testing & Deployment (Weeks 11-12)
+○ Perform thorough testing: unit testing, integration testing, and user acceptance testing (UAT).
+○ Fix bugs and refine the UI/UX.
+○ Ensure your in-house web service is stable and deployed.
+○ Prepare the final mobile application build (e.g., APK file).
+4. Phase 4: Documentation & Presentation (Weeks 13-14)
+○ Write the final project report (see structure below).
+○ Record and edit your video presentation.
+
+5. Deliverables
+A. Final Report (PDF)
+
+You must submit a formal project report. Your report must follow this exact structure:
+1.
+2.
+3.
+4.
+
+Cover page (Course, Project Title, Group Members, Student IDs)
+Table of contents
+Introduction (Project background, problem statement, objectives, project scope)
+Cloud services used
+○ Detailed explanation of all 3+ third-party services used.
+○ Detailed explanation of your 1+ in-house web service.
+○ Justification: For each service, explain what it does and why you chose it over alternatives.
+5. Design
+○ System Architecture: A clear, detailed diagram.
+○ Database Design: Schema diagrams (for Firestore, NoSQL, or SQL).
+○ Service Design: API endpoint documentation for your in-house service.
+○ UI/UX Design: Include key wireframes and mockups.
+6. Methodology
+○ Explain the development methodology you used (e.g., Agile, Waterfall) and how your team
+applied it (e.g., sprint planning, tools used like Trello/Jira). This is a critical section.
+7. Screenshots of your application
+○ High-quality screenshots that demonstrate all the key features and workflows of your
+application.
+8. Conclusion, limitation, and recommendation
+○ Conclusion: Summarize the project and what you achieved.
+○ Limitations: Discuss any technical challenges, unmet goals, or limitations of your app.
+○ Recommendation: Propose future work and improvements.
+9. References (Use APA or IEEE format)
+10. Link to Video presentation (Must be a shareable, working link, e.g., YouTube or Google Drive)
+
+B. Video Presentation
+You must create a video presentation of your project.
+●
+●
+
+●
+
+Length: Maximum 15 minutes.
+Content:
+○ Brief introduction of the team and the project.
+○ Live demonstration of the final, working mobile application. This is the most important part.
+○ Brief overview of your cloud architecture.
+○ Discussion of challenges and lessons learned.
+Link: The link must be included in the final report.
+
+C. Source Code
+Submit a link to a private LINK (will be provided) containing the complete source code for:
+1. The mobile application.
+2. The in-house web service.
+
+
