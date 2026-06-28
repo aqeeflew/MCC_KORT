@@ -90,11 +90,20 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <Switch
+                android:id="@+id/switchBroadcast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Broadcast this booking for matchmaking"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
             <Button
                 android:id="@+id/btnFinalConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:backgroundTint="#00C853"
                 android:text="Confirm Booking"
                 android:textColor="#FFFFFF"

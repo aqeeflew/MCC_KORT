@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private Button btnLogin;
     private TextView tvRegister;
+    private ProgressBar progressBar;
     private FirebaseAuth mAuth; // Firebase Auth instance
 
     @Override
@@ -34,12 +36,15 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvRegister = findViewById(R.id.tvRegister);
+        progressBar = findViewById(R.id.progressBar);
 
         if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
             return;
         }
+
+        ProgressBar progressBar = findViewById(R.id.progressBar);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,16 +58,20 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 btnLogin.setEnabled(false);
+                progressBar.setVisibility(View.VISIBLE);
+                
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginActivity.this, task -> {
+                            progressBar.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             } else {
                                 btnLogin.setEnabled(true);
+                                String errorMsg = task.getException() != null ? task.getException().getMessage() : "Unknown error occurred";
                                 Toast.makeText(LoginActivity.this, "Authentication failed: " +
-                                        task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                        errorMsg, Toast.LENGTH_LONG).show();
                             }
                         });
             }

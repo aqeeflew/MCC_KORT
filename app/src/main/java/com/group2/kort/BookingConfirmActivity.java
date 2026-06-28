@@ -19,10 +19,16 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -168,17 +174,50 @@ public class BookingConfirmActivity extends AppCompatActivity {
         updates.put("/bookings/" + bookingId, bookingMap);
         updates.put("/userBookings/" + uid + "/" + bookingId, bookingMap);
 
+        Switch switchBroadcast = findViewById(R.id.switchBroadcast);
+        boolean isBroadcast = switchBroadcast.isChecked();
+
         mDatabase.updateChildren(updates)
                 .addOnSuccessListener(aVoid -> {
                     saveToOfflineDB();
                     setAlarm(sport);
-                    Toast.makeText(BookingConfirmActivity.this, "Booking saved to Firebase!", Toast.LENGTH_SHORT).show();
-                    navigateToDashboard();
+                    if (isBroadcast) {
+                        broadcastMatch(bookingId, uid);
+                    } else {
+                        Toast.makeText(BookingConfirmActivity.this, "Booking saved to Firebase!", Toast.LENGTH_SHORT).show();
+                        navigateToDashboard();
+                    }
                 })
                 .addOnFailureListener(e -> {
                     findViewById(R.id.btnFinalConfirm).setEnabled(true);
                     Toast.makeText(BookingConfirmActivity.this, "Sync Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
+    }
+
+    private void broadcastMatch(String bookingId, String hostUserId) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(getString(R.string.api_base_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        MatchmakingApi api = retrofit.create(MatchmakingApi.class);
+        MatchmakingApi.BroadcastRequest request = new MatchmakingApi.BroadcastRequest(
+                bookingId, hostUserId, sport, court, 1, date, time
+        );
+
+        api.broadcastMatch(request).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(BookingConfirmActivity.this, "Booking & Broadcast successful!", Toast.LENGTH_SHORT).show();
+                navigateToDashboard();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(BookingConfirmActivity.this, "Booking successful, but Broadcast failed.", Toast.LENGTH_SHORT).show();
+                navigateToDashboard();
+            }
+        });
     }
 
     private String makeFirebaseKey(String value) {

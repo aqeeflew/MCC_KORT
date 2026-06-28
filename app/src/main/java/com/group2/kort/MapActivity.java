@@ -31,7 +31,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mapFragment.getMapAsync(this);
         }
 
-        FloatingActionButton fabBack = findViewById(R.id.fabBack);
+        android.widget.ImageButton fabBack = findViewById(R.id.fabBack);
         fabBack.setOnClickListener(v -> finish());
     }
 

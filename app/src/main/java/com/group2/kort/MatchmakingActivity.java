@@ -98,7 +98,7 @@ public class MatchmakingActivity extends AppCompatActivity {
 
     private void fetchAvailableMatches() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000")
+                .baseUrl(getString(R.string.api_base_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

@@ -85,6 +85,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         findViewById(R.id.cardBadminton).setOnClickListener(v -> openSelection("Badminton"));
         findViewById(R.id.cardFutsal).setOnClickListener(v -> openSelection("Futsal"));
         findViewById(R.id.cardTennis).setOnClickListener(v -> openSelection("Tennis"));
+
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
     }
 
     /**
@@ -94,14 +102,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Intent intent = new Intent(this, CourtSelectionActivity.class);
         intent.putExtra("SPORT_TYPE", sport);
         startActivity(intent);
-
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }
     }
 
     @Override

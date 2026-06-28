@@ -81,9 +81,9 @@ app.post('/api/matchmaking/join', async (req, res) => {
 
     const matchRef = db.ref(`matchmaking/${matchId}`);
     
-    await matchRef.transaction((currentData) => {
+    const { committed, snapshot } = await matchRef.transaction((currentData) => {
       if (currentData === null) {
-        return currentData; // Match doesn't exist
+        return undefined; // Match doesn't exist, abort transaction
       }
       
       if (currentData.neededPlayers > 0) {
@@ -98,9 +98,15 @@ app.post('/api/matchmaking/join', async (req, res) => {
             currentData.status = 'filled';
           }
         }
+      } else {
+          return undefined; // Abort if full
       }
       return currentData;
     });
+
+    if (!committed) {
+        return res.status(400).json({ error: 'Match does not exist, is full, or could not be joined' });
+    }
 
     res.status(200).json({ message: 'Successfully joined match' });
   } catch (error) {

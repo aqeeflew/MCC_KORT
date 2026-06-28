@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference database;
     private EditText etName, etEmail, etPassword;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etRegPassword);
         Button btnRegister = findViewById(R.id.btnRegister);
 
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +60,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 btnRegister.setEnabled(false);
+                progressBar.setVisibility(View.VISIBLE);
+                
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(RegisterActivity.this, task -> {
                             if (task.isSuccessful()) {
@@ -67,20 +73,25 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 database.child("users").child(uid).setValue(user)
                                         .addOnSuccessListener(unused -> {
+                                            progressBar.setVisibility(View.GONE);
                                             Toast.makeText(RegisterActivity.this, "User Registered!", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                             startActivity(intent);
                                             finishAffinity();
                                         })
                                         .addOnFailureListener(error -> {
+                                            progressBar.setVisibility(View.GONE);
                                             btnRegister.setEnabled(true);
+                                            String errorMsg = error != null ? error.getMessage() : "Unknown error occurred";
                                             Toast.makeText(RegisterActivity.this,
-                                                    "Profile save failed: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                                                    "Profile save failed: " + errorMsg, Toast.LENGTH_LONG).show();
                                         });
                             } else {
+                                progressBar.setVisibility(View.GONE);
                                 btnRegister.setEnabled(true);
+                                String errorMsg = task.getException() != null ? task.getException().getMessage() : "Unknown error occurred";
                                 Toast.makeText(RegisterActivity.this, "Error: " +
-                                        task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                        errorMsg, Toast.LENGTH_LONG).show();
                             }
                         });
             }
