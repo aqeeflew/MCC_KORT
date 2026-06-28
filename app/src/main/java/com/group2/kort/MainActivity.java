@@ -6,7 +6,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import androidx.cardview.widget.CardView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import android.widget.TextView;
@@ -15,8 +14,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.SupportMapFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,5 +94,28 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CourtSelectionActivity.class);
         intent.putExtra("SPORT_TYPE", sport);
         startActivity(intent);
+
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Set the coordinates for your court (Example: Kuala Lumpur)
+        LatLng courtLocation = new LatLng(3.1390, 101.6869);
+
+        // Add a marker at the court location and move the camera
+        mMap.addMarker(new MarkerOptions()
+                .position(courtLocation)
+                .title("KORT Main Court"));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(courtLocation, 15f));
     }
 }
