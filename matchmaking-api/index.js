@@ -7,7 +7,7 @@ const admin = require('firebase-admin');
 // or provide the service account object directly to admin.initializeApp()
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
-  databaseURL: "https://kort-app-default-rtdb.firebaseio.com" // Update with real databaseURL if different
+  databaseURL: process.env.FIREBASE_DATABASE_URL || "https://kort-mcc-default-rtdb.asia-southeast1.firebasedatabase.app"
 });
 
 const db = admin.database();
